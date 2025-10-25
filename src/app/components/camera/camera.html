@@ -1,0 +1,62 @@
+<div class="camera-container">
+  <div class="header">
+    <h2>Camera Mode</h2>
+    <div class="status" [class.streaming]="isStreaming">
+      {{ isStreaming ? '🔴 Live Streaming' : '⚫ Offline' }}
+    </div>
+  </div>
+
+  <div class="video-section">
+    <video #cameraPreview autoplay muted playsinline class="camera-preview"></video>
+    
+    <div class="camera-error" *ngIf="!hasCameraAccess">
+      <div class="error-content">
+        <i class="icon">📷</i>
+        <h4>Camera Access Required</h4>
+        <p>Please allow camera access to use this feature</p>
+        <button (click)="retryCameraAccess()" class="btn btn-primary">
+          Grant Camera Access
+        </button>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <div class="device-selection" *ngIf="!isStreaming && hasCameraAccess">
+        <label for="monitorSelect">Select Monitor:</label>
+        <select id="monitorSelect" [(ngModel)]="selectedMonitorDeviceId">
+          <option value="">-- Select a monitor --</option>
+          <option *ngFor="let device of devices" [value]="device.deviceId">
+            {{ device.deviceName }} ({{ device.isOnline ? 'Online' : 'Offline' }})
+          </option>
+        </select>
+      </div>
+
+      <div class="action-buttons" *ngIf="hasCameraAccess">
+        <button 
+          *ngIf="!isStreaming"
+          (click)="startStreaming()" 
+          class="btn btn-success"
+          [disabled]="!selectedMonitorDeviceId">
+          ▶ Start Streaming
+        </button>
+        
+        <button 
+          *ngIf="isStreaming"
+          (click)="stopStreaming()" 
+          class="btn btn-danger">
+          ⏹ Stop Streaming
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-info" *ngIf="currentSession">
+    <h4>Active Session</h4>
+    <p>Session ID: {{ currentSession.sessionId }}</p>
+    <p>Started: {{ currentSession.startTime | date:'medium' }}</p>
+  </div>
+
+  <div class="performance-info" *ngIf="isStreaming">
+    <p>📊 Streaming at ~10 FPS | Using canvas capture method</p>
+  </div>
+</div>

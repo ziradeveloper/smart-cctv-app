@@ -1,0 +1,67 @@
+<div class="container-fluid vh-100 bg-light">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-md-4 col-sm-8">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">
+            {{ isRegistering ? 'Create Account' : 'SmartCCTV Pro' }}
+          </h2>
+          
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Full Name Field (only for registration) -->
+            <div class="mb-3" *ngIf="isRegistering">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fullName"
+                formControlName="fullName"
+                placeholder="Enter your full name">
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Enter your email">
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Enter your password">
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="!loginForm.valid || isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ isRegistering ? 'Register' : 'Login' }}
+            </button>
+
+            <!-- Toggle Mode -->
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-link"
+                (click)="toggleMode()">
+                {{ isRegistering ? 'Already have an account? Login' : 'Need an account? Register' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

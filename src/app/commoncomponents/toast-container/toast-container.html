@@ -1,0 +1,15 @@
+<!-- src/app/commoncomponents/toast-container/toast-container.html -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1055">
+  <div *ngFor="let t of toastService.toasts"
+       class="toast show text-bg-{{t.type}} border-0 mb-2"
+       role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        <strong *ngIf="t.title">{{t.title}}: </strong>{{t.message}}
+      </div>
+      <button type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              (click)="toastService.remove(t.id)"></button>
+    </div>
+  </div>
+</div>

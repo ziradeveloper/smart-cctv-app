@@ -1,0 +1,165 @@
+.camera-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  h2 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .status {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    font-weight: bold;
+    
+    &.streaming {
+      background: #ff4444;
+      color: white;
+    }
+  }
+}
+
+.video-section {
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.camera-preview {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.camera-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  
+  .error-content {
+    text-align: center;
+    
+    .icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 16px;
+    }
+    
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
+    
+    p {
+      margin: 0 0 16px 0;
+      opacity: 0.8;
+    }
+    
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+.controls {
+  padding: 20px;
+  background: #f8f9fa;
+  
+  .device-selection {
+    margin-bottom: 15px;
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+  
+  .action-buttons {
+    text-align: center;
+    
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      
+      &.btn-success {
+        background: #28a745;
+        color: white;
+      }
+      
+      &.btn-danger {
+        background: #dc3545;
+        color: white;
+      }
+    }
+  }
+}
+
+.session-info {
+  background: #e9ecef;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  
+  h4 {
+    margin: 0 0 10px 0;
+    color: #495057;
+  }
+  
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+}
+
+.performance-info {
+  background: #d1ecf1;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border-left: 4px solid #0dcaf0;
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #055160;
+  }
+}

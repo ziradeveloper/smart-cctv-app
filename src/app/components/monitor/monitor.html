@@ -1,0 +1,55 @@
+<div class="monitor-container">
+  <div class="header">
+    <h2>Monitor Mode</h2>
+    <div class="status" [class.monitoring]="isMonitoring">
+      {{ isMonitoring ? '🟢 Active Monitoring' : '⚫ Standby' }}
+    </div>
+  </div>
+
+  <div class="video-section">
+    <div class="video-placeholder" *ngIf="!videoFrame && !isMonitoring">
+      <div class="placeholder-content">
+        <i class="icon">📹</i>
+        <p>No active stream</p>
+      </div>
+    </div>
+    
+    <img *ngIf="videoFrame" [src]="videoFrame" class="video-stream" alt="Live Stream">
+    
+    <div class="controls">
+      <div class="camera-selection" *ngIf="!isMonitoring">
+        <label for="cameraSelect">Select Camera:</label>
+        <select id="cameraSelect" [(ngModel)]="selectedCameraDeviceId">
+          <option value="">-- Select a camera --</option>
+          <option *ngFor="let camera of availableCameras" [value]="camera.deviceId">
+            {{ camera.deviceName }} ({{ camera.isOnline ? 'Online' : 'Offline' }})
+          </option>
+        </select>
+      </div>
+
+      <div class="action-buttons">
+        <button 
+          *ngIf="!isMonitoring"
+          (click)="startMonitoring()" 
+          class="btn btn-primary"
+          [disabled]="!selectedCameraDeviceId">
+          👁 Start Monitoring
+        </button>
+        
+        <button 
+          *ngIf="isMonitoring"
+          (click)="stopMonitoring()" 
+          class="btn btn-danger">
+          ⏹ Stop Monitoring
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="connection-info" *ngIf="currentSession">
+    <h4>Connection Info</h4>
+    <p>Session: {{ currentSession.sessionId }}</p>
+    <p>Camera: {{ currentSession.cameraDeviceId }}</p>
+    <p>Connected: {{ currentSession.startTime | date:'medium' }}</p>
+  </div>
+</div>
